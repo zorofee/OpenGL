@@ -80,8 +80,8 @@ namespace BasicLighting
 
 		// build and compile our shader zprogram
 		// ------------------------------------
-		Shader lightingShader("Lighting/basic_lighting.vs", "Lighting/basic_lighting.fs");
-		Shader lightCubeShader("Lighting/light_cube.vs", "Lighting/light_cube.fs");
+		Shader lightingShader("Lighting/Shaders/2.2.basic_lighting.vs", "Lighting/Shaders/2.2.basic_lighting.fs");
+		Shader lightCubeShader("Lighting/Shaders/2.2.light_cube.vs", "Lighting/Shaders/2.2.light_cube.fs");
 
 		// set up vertex data (and buffer(s)) and configure vertex attributes
 		// ------------------------------------------------------------------
