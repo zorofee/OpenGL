@@ -11,23 +11,54 @@ uniform vec3 objectColor;
 
 void main()
 {
-    // ambient
-    float ambientStrength = 0.1;
-    vec3 ambient = ambientStrength * lightColor;
-  	
-    // diffuse 
-    vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(lightPos - FragPos);
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * lightColor;
-    
-    // specular
-    float specularStrength = 0.5;
-    vec3 viewDir = normalize(viewPos - FragPos);
-    vec3 reflectDir = reflect(-lightDir, norm);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    vec3 specular = specularStrength * spec * lightColor;  
-        
-    vec3 result = (ambient + diffuse + specular) * objectColor;
-    FragColor = vec4(result, 1.0);
+	bool blinn = false;
+	//ambient
+	float ambientStrength = 0.5;
+	vec3 ambient = ambientStrength * lightColor;
+
+	//diffuse
+	vec3 norm = normalize(Normal);
+	vec3 lightDir = normalize(lightPos - FragPos);
+	float diff = max(dot(norm,lightDir),0);
+	vec3 diffuse = diff * lightColor;
+
+	//specular
+	float specularStrength = 0.5;
+	vec3 viewDir = normalize(viewPos - FragPos);
+	float spe;
+	if(blinn)
+	{
+	//blinn-phong
+		vec3 halfwayDir = normalize(lightDir + viewDir);
+		spe = pow(max(dot(norm,halfwayDir),0.0),32.0);
+	}
+	else
+	{
+	//phong
+		vec3 reflectDir = normalize(reflect(-lightDir,norm));
+		spe = pow(max(dot(viewDir,reflectDir),0),32);
+	}
+	
+	
+	vec3 specular = spe * lightColor * specularStrength;
+
+	vec3 result = (ambient+diffuse+specular )*objectColor;
+	FragColor = vec4(result,1.0);
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
