@@ -1,7 +1,9 @@
 #pragma once
-#ifndef STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#endif // !STB_IMAGE_IMPLEMENTATION
+//
+//#ifndef STB_IMAGE_IMPLEMENTATION
+//#define STB_IMAGE_IMPLEMENTATION
+//#endif // !STB_IMAGE_IMPLEMENTATION
+//
 
 //----------------GetStarted--------------
 //#include "GetStarted/Triangle.h"
@@ -18,22 +20,27 @@
 //#include "Lighting/BasicLighting.h"
 //#include "Lighting/4.2Materials.h"
 //#include "Lighting/4.3LightingMaps.h"
-#include "Lighting/LightCasters.h"
+//#include "Lighting/LightCasters.h"
 
 //----------------AdvancedOpengl--------------
-//#include "AdvancedOpengl/GeometryShader.h"
 //#include "AdvancedOpengl/DepthTest.h"
+//#include "AdvancedOpengl/GeometryShader.h"
+//#include "AdvancedOpengl/MSAA.h"
+//#include "AdvancedOpengl/MSAA_off_screen.h"
+//#include "AdvancedOpengl/FrameBuffers.h"
 
 //----------------AdvancedLighting--------------
-//#include "AdvancedLighting/SSAO.h"
+#include "AdvancedLighting/SSAO.h"
 //#include "AdvancedLighting/StencilTesting.h"
 //#include "AdvancedLighting/ShadowMap.h"
 //#include "AdvancedLighting/DepthMap.h"
+//#include "AdvancedLighting/NormalMap.h"
 //#include "AdvancedLighting/Hdr.h"
+//#include "AdvancedLighting/DeferredShading.h"
 
 //----------------PBR--------------
 //#include "PBR/PBR_Lighting.h"
-
+//#include "PBR/PBR_Texture.h"
 
 int main()
 {
@@ -50,17 +57,24 @@ int main()
 	//BasicLighting::main();
 	//Materials::main();
 	//LightingMaps::main();
-	LightCasters::main();
+	//LightCasters::main();
 
 	//GeometryShader::main();
 	//DepthTest::main();
+	//MSAA::main();
+	//MSAA_off_screen::main();
+	//FrameBuffers::main();
 
-	//ssao::ssao_main();
+	//DeferredShading::main();
+	ssao::ssao_main();
 	//StencilTesting::main();
 	//ShadowMap::main();
 	//DepthMap::main();
 	//HDR::main();
+	//NormalMap::main();
 
 	//PBR::pbr_main();
+	//PBR_Texture::main();
+	
 	return 0;
 }
