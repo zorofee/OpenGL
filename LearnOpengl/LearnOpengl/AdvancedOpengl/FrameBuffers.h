@@ -205,11 +205,13 @@ namespace FrameBuffers {
 		unsigned int textureColorbuffer;
 		glGenTextures(1, &textureColorbuffer);
 		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH,SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+		
 		// create a renderbuffer object for depth and stencil attachment (we won't be sampling these)
+	
 		unsigned int rbo;
 		glGenRenderbuffers(1, &rbo);
 		glBindRenderbuffer(GL_RENDERBUFFER, rbo);
@@ -218,8 +220,9 @@ namespace FrameBuffers {
 		// now that we actually created the framebuffer and added all attachments we want to check if it is actually complete now
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << endl;
+		
+		
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 		// draw as wireframe
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -270,6 +273,11 @@ namespace FrameBuffers {
 			glBindTexture(GL_TEXTURE_2D, floorTexture);
 			shader.setMat4("model", glm::mat4(1.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 6);
+
+			//glfwSwapBuffers(window);
+			//glfwPollEvents();
+			//continue;
+
 			glBindVertexArray(0);
 
 			// now bind back to default framebuffer and draw a quad plane with the attached framebuffer color texture
@@ -283,7 +291,7 @@ namespace FrameBuffers {
 			glBindVertexArray(quadVAO);
 			glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	// use the color attachment texture as the texture of the quad plane
 			glDrawArrays(GL_TRIANGLES, 0, 6);
-
+			
 
 			// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			// -------------------------------------------------------------------------------
